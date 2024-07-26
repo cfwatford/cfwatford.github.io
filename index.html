@@ -29,7 +29,9 @@
    float:left;
 }
 
-
+img {
+	height:100%;
+}
 
 
 </style>
@@ -44,6 +46,8 @@ Lewd<br />
 <input type="text" id="slewd_input"><br /><br />
 Expo<br />
 <input type="text" id="sexpo_input"><br /><br />
+
+<input type="file">
 <span onclick="updateDetails();">Update</span>
 
 </DIV>
@@ -59,7 +63,7 @@ Expo<br />
 				</DIV>
 				<DIV id="cardnum" style="position:absolute;right:25px;bottom:13px;font-size:12px;color:rgba(230,125,213,1);font-family:'IBM Plex Mono';font-weight:600;">SLUT CARD NUMBER. 0003</DIV>
 				
-				<DIV id="image" style="left:15px;top:20px;width:670px;height:1220px;overflow: hidden;display: flex;align-items: center; justify-content: center; position: relative;"><IMG SRC="test.jpg" style="height:100%;"></DIV>
+				<DIV id="image" style="left:15px;top:20px;width:670px;height:1220px;overflow: hidden;display: flex;align-items: center; justify-content: center; position: relative;"><IMG id="mainimg" SRC="test.jpg" style="height:100%;"></DIV>
 				
 				<DIV id="sname1" style="position:absolute;left:25px;top:27px;font-size:50px;color:rgba(118,232,255,1);font-family:'Orbitron';font-weight:700;width:calc(100% - 50px);text-align:center;">MIMIKA</DIV>
 				<DIV id="sname2" style="position:absolute;left:25px;top:33px;font-size:50px;color:rgba(230,125,213,1);font-family:'Orbitron';font-weight:700;width:calc(100% - 50px);text-align:center;">MIMIKA</DIV>
@@ -107,6 +111,38 @@ Expo<br />
 </DIV>
 
 <script>
+	$(document).ready(function() {
+		$("#image").on('dragenter', function(e) {
+			e.preventDefault();
+		});
+
+		$("#image").on('dragover', function(e) {
+			e.preventDefault();
+		});
+
+		$("#image").on('drop', function(e){
+        if(e.originalEvent.dataTransfer && e.originalEvent.dataTransfer.files.length) {
+            e.preventDefault();
+            e.stopPropagation();
+            /*UPLOAD FILES HERE*/
+            /*console.log(e.originalEvent.dataTransfer.files[0]);*/
+			const file = e.originalEvent.dataTransfer.files[0]
+			let reader = new FileReader()
+			  reader.readAsDataURL(file)
+			  reader.onloadend = function() {
+				let img = document.createElement('img')
+				img.src = reader.result
+				$('#image').html(img)
+			  }
+			
+		}});
+	});
+	
+
+	
+</script>
+
+<script>
 
 function updateDetails() {
 	var varName = $('#sname_input').val();
@@ -124,7 +160,8 @@ function updateDetails() {
 
 function updateImg() {
 	html2canvas(document.getElementById("card"), {height:1280, width:720}).then(function(canvas) {
-		document.getElementById("output").appendChild(canvas);
+		/*document.getElementById("output").appendChild(canvas);*/
+		$('#output').html(canvas)
 	});
 }
 </script>
