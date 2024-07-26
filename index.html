@@ -36,7 +36,7 @@ img {
 
 </style>
 
-<DIV style="float:left;width:200px;height:100%;">
+<DIV style="float:left;width:200px;height:100%;font-family:'IBM Plex Mono';">
 
 Name<br />
 <input type="text" id="sname_input"><br /><br />
@@ -46,9 +46,12 @@ Lewd<br />
 <input type="text" id="slewd_input"><br /><br />
 Expo<br />
 <input type="text" id="sexpo_input"><br /><br />
+Card Number<br />
+<input type="text" id="snum_input"><br /><br />
+Image<br />
+<input type="file"><br /><br />
 
-<input type="file">
-<span onclick="updateDetails();">Update</span>
+<span onclick="updateDetails();" style="font-weight:800;">Update</span>
 
 </DIV>
 
@@ -61,7 +64,7 @@ Expo<br />
 				<DIV id="cmgame" style="position:absolute;right:25px;top:13px;font-size:12px;color:#cccccc;font-family:'IBM Plex Mono';font-weight:600;">
 					<SPAN style="color:rgba(118,232,255,1);">CLASH</SPAN>OF<SPAN style="color:rgba(230,125,213,1);">WEBSLUTS</SPAN>
 				</DIV>
-				<DIV id="cardnum" style="position:absolute;right:25px;bottom:13px;font-size:12px;color:rgba(230,125,213,1);font-family:'IBM Plex Mono';font-weight:600;">SLUT CARD NUMBER. 0003</DIV>
+				<DIV id="cardnum" style="position:absolute;right:25px;bottom:13px;font-size:12px;color:rgba(230,125,213,1);font-family:'IBM Plex Mono';font-weight:600;">SLUT CARD NUMBER. <span id='scardnum'>0003</span></DIV>
 				
 				<DIV id="image" style="left:15px;top:20px;width:670px;height:1220px;overflow: hidden;display: flex;align-items: center; justify-content: center; position: relative;"><IMG id="mainimg" SRC="test.jpg" style="height:100%;"></DIV>
 				
@@ -152,9 +155,11 @@ function updateDetails() {
 	var varBody = $('#sbody_input').val();
 	var varLewd = $('#slewd_input').val();
 	var varExpo = $('#sexpo_input').val();
+	var varNum = $('#snum_input').val();
 	$('#sbody').html(varBody);
 	$('#slewd').html(varLewd);
 	$('#sexpo').html(varExpo);
+	$('#scardnum').html(varNum);
 	updateImg();
 }
 
